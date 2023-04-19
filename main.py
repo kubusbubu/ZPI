@@ -5,14 +5,12 @@ import os
 import glob
 import logging
 
-
-def log_init():
-    logging.basicConfig(level=logging.INFO, filname="log.log", filemode="w")
-    logger = logging.getLogger(__name__)
-    handler = logging.FileHandler('logger.log')
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
+logging.basicConfig(level=logging.INFO, filname="log.log", filemode="w")
+logger = logging.getLogger(__name__)
+handler = logging.FileHandler('logger.log')
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 
 
 def get_json_files():
@@ -73,14 +71,8 @@ def tar_handling():
     return output_dir
 
 
-def check_csv(csv):
-    #looks for errors in individual csv files
-    pass
-
-
 def main():
-    log_init()
-    get_json_files()
+    main_json, individual_jsons_arr = get_json_files()
     datasets_dir_path = tar_handling()
     get_dataset_names()
 
