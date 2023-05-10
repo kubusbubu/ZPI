@@ -1,0 +1,10 @@
+WARNING:comparing:There is missing file debt_bb_pr.csv
+WARNING:comparing:There is missing file eq_bb_pr.csv
+WARNING:comparing:There is missing file trader.csv
+WARNING:comparing:There is missing file fb_trader.csv
+WARNING:comparing:There is missing file fx_shredder.csv
+WARNING:comparing:There is missing file GFX_Spot.csv
+WARNING:comparing:There is missing file eq_rt_pr.csv
+WARNING:comparing:There is missing file reference_entity.csv
+WARNING:comparing:There is missing file sdata_commodity.csv
+WARNING:comparing:There is missing file eq_rt_pr_adj_factor.csv
