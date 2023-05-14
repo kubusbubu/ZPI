@@ -7,7 +7,7 @@ import string
 
 # with open('dda_json/contoption.json', 'r') as f:
 #   jsondata = json.load(f)
-with open('dda_json/trader_cds_price.json', 'r') as f:
+with open('data_json/trader_cds_price.json', 'r') as f:
   jsondata = json.load(f)
 
 
@@ -59,10 +59,10 @@ for atrybut in jsondata:
     col_name = atrybut['name']
     col_type = atrybut['type']
     if col_type == 'INTEGER':
+        df[col_name] = integer_data
+    elif col_type == 'DOUBLE':
         df[col_name] = float_data
-    if col_type == 'DOUBLE':
-        df[col_name] = float_data
-    if col_type == 'STRING':
+    elif col_type == 'STRING':
         df[col_name] = string_data
     else:
         df[col_name] = date_data
