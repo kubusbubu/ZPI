@@ -17,6 +17,7 @@ def create_tar_file(directory, output_filename):
             file_path = os.path.join(directory, file)
             if os.path.isfile(file_path):
                 tar.add(file_path, arcname=os.path.basename(file_path))
+    print('Tar file sucessfully created')
 
 
 # change value type before checking files (consistency)
@@ -48,11 +49,11 @@ def date_format_standardization(custom_format):
 # function to unpack the contents of the tar file
 def tar_unpack():
     # unpacks tar file
-    tar_file_path = input("Enter path to tar file:")
+    tar_file_path = input("Enter path to tar file: ")
     output_dir_path = 'tar_output_dir'
     with tarfile.open(tar_file_path, 'r') as tar:
         tar.extractall(output_dir_path)
-    return None
+    return output_dir_path
 
 
 # funckja do zapisania plikow csv z danej sciezki do listy z ramkami pandas
@@ -70,7 +71,8 @@ def load_multiple_csv_to_dataframes(directory):
 # function to download dda files and store them in memory
 def get_json_files():
     while True:
-        folder_path = input("Enter dda folder path: ")
+        # folder_path = input("Enter dda folder path: ")
+        folder_path = 'dda_json'
         if os.path.exists(folder_path) and os.path.isdir(folder_path):
             if not folder_path.endswith(os.path.sep):
                 folder_path += os.path.sep
@@ -108,3 +110,13 @@ def logger_function():
 def clear_logger() -> None:
     with open('log.log', 'w'):
         pass
+
+
+def change_type_to_compare(value):
+    if value == 'INTEGER':
+        value = np.int64
+    elif value == 'STRING':
+        value = object
+    elif value == 'DOUBLE':
+        value = np.float64
+    return value

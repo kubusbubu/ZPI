@@ -1,10 +1,12 @@
 from datetime import datetime
-from tools import date_format_standardization
+from tools import date_format_standardization, change_type_to_compare
 import logging
 import os
 from tools import logger_function
 import json
 import csv
+import numpy as np
+import datetime
 
 logger_function()
 log = logging.getLogger(__name__)
@@ -32,6 +34,7 @@ def date_format_check(date, format) -> None:
         datetime.strptime(date, format_standardized)
         print("Valid date format")
     except ValueError:
+        # log.warning(f'Invalid date format')
         print("Invalid date format")
 
 
@@ -43,34 +46,35 @@ def check_column_names(dataframe, json_file):
     for column in range(len(json_file)):
         if json_file[column]["name"] != df_columns[column]:
             # blad powinien byc rozwiniety jescze o nazwe pliku i nazwe kolumny
-            log.warning("Wrong column name in " + " dataframe, column name : " + json_file[column]["name"])
+            log.warning(f"Wrong column name in ... column name :  {json_file[column]['name']}")
 
 
-# sprawdz typy kolumn - > to nie bedzie dzialac
+'''
+# DO naprawy
 def check_column_types(dataframe, json_file):
     # csv -> pandas
-    df_columns = list(dataframe.columns)
-    del df_columns[0]
-    for column in range(len(json_file)):
-        if json_file[column]["type"] != df_columns[column]:
-            # blad powinien byc rozwiniety jescze o nazwe pliku i nazwe kolumny
-            log.warning("Wrong column type in " + " dataframe, column name : " + json_file[column]["name"])
+    df_types = list(dataframe.dtypes)
+    print(dataframe.dtypes)
+    del df_types[0]
+    for type in range(len(json_file)):
+        if change_type_to_compare(json_file[type]["type"]) != df_types[type]:
+            print(f"typ z json: {json_file[type]['type']}, z json po konwersji: {change_type_to_compare(json_file[type]['type'])}, df.type:{df_types[type]}")
+            # Dodac nazwe datasetu
+            log.warning(f"Wrong column type in ... column name :  {json_file[type]['name']}")
+'''
 
 
 # sprawdz wartosci w kolumnach
 def check_dataframe_types(dataframe, json_file):
-    # Read the JSON file
-
-    # with open(json_file, 'r') as f:
-    #     column_types = json.load(f)
     df_columns = list(dataframe.columns)
     del df_columns[0]
     
     for ind, column_name in enumerate(df_columns):
-        # Get the expected type for the current column
-        
-        # expected_type = column_types.get(column_name)
         expected_type = json_file[ind]["type"]
+        try:
+            expected_date_pattern = json_file[ind]["time_format"]
+        except KeyError:
+            pass
 
         if expected_type is None:
             raise ValueError(f"No type information found for column '{column_name}' in the JSON file.")
@@ -79,13 +83,13 @@ def check_dataframe_types(dataframe, json_file):
         # Add log information
         values = dataframe[column_name]
         if expected_type == 'STRING' and not values.apply(lambda x: isinstance(x, str)).all():
-            return False
-        elif expected_type == 'DATE' and not values.apply(lambda x: isinstance(x, str)).all():
-            return False  # Adjust this condition based on your date format
+            log.warning(f"Wrong value type in {column_name}. Correct type is {expected_type}")
+        elif expected_type == 'DATE' and not values.apply(lambda x: isinstance(x, datetime.date)).all():
+            log.warning(f"Wrong value type in {column_name}. Correct type is {expected_type}")
         elif expected_type == 'DOUBLE' and not values.apply(lambda x: isinstance(x, float)).all():
-            return False
+            log.warning(f"Wrong value type in {column_name}. Correct type is {expected_type}")
         elif expected_type == 'INTEGER' and not values.apply(lambda x: isinstance(x, int)).all():
-            return False
+            log.warning(f"Wrong value type in {column_name}. Correct type is {expected_type}")
     
     return True  # All values in all columns are of the correct types
 
