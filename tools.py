@@ -31,6 +31,8 @@ def convert_string_to_format(value):
     return value
 
 
+
+
 # helper function to change the date format (before checking the file)
 def date_format_standardization(custom_format):
     custom_format = custom_format.replace("YYYY", "%Y")
@@ -72,7 +74,7 @@ def load_multiple_csv_to_dataframes(directory):
 def get_json_files():
     while True:
         # folder_path = input("Enter dda folder path: ")
-        folder_path = 'dda_json'
+        folder_path = 'data_json'
         if os.path.exists(folder_path) and os.path.isdir(folder_path):
             if not folder_path.endswith(os.path.sep):
                 folder_path += os.path.sep
@@ -120,3 +122,4 @@ def change_type_to_compare(value):
     elif value == 'DOUBLE':
         value = np.float64
     return value
+

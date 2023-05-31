@@ -1,6 +1,6 @@
 from tools import logger_function, tar_unpack, date_format_standardization, get_json_files, create_tar_file, \
     load_multiple_csv_to_dataframes, clear_logger
-from comparing import date_format_check, check_datasets_names_and_extensions, check_column_names,  check_dataframe_types
+from comparing import Comparing, check_datasets_names_and_extensions
 import logging
 
 
@@ -14,20 +14,23 @@ def main():
     # unpack tar file
     datasets_dir_path = tar_unpack()
 
-    # check if datasets names and extensions are valid
-    check_datasets_names_and_extensions(datasets_dir_path, main_json)
+    # print(datasets_dir_path)
 
     # load datasets to a list of pandas dataframes
     csv_dataframes = load_multiple_csv_to_dataframes(datasets_dir_path)
 
-    i = 0
-    for dataframe in csv_dataframes:
+    # check if datasets names and extensions are valid
+    check_datasets_names_and_extensions(main_json,datasets_dir_path)
+
+
+    for i, dataframe in enumerate(csv_dataframes):
+        shard_object = Comparing(datasets_dir_path, individual_jsons_arr[i], dataframe)
+
         # check if column names in each dataset are valid
-        check_column_names(dataframe, individual_jsons_arr[i])
+        shard_object.check_column_names()
 
         # check if each row in each dataset is valid type
-        check_dataframe_types(dataframe, individual_jsons_arr[i])
-        i += 1
+        shard_object.check_dataframe_types()
 
 
 if __name__ == '__main__':

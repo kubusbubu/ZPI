@@ -8,10 +8,6 @@ WARNING:comparing:There is missing file eq_rt_pr.csv
 WARNING:comparing:There is missing file reference_entity.csv
 WARNING:comparing:There is missing file sdata_commodity.csv
 WARNING:comparing:There is missing file eq_rt_pr_adj_factor.csv
-WARNING:comparing:Wrong value type in mds_date. Correct type is DATE
-WARNING:comparing:Wrong value type in version_date. Correct type is DATE
-WARNING:comparing:Wrong value type in LABEL. Correct type is DATE
-WARNING:comparing:Wrong value type in MDS_DATE. Correct type is DATE
 WARNING:comparing:Wrong value type in firm_contract_type. Correct type is INTEGER
 WARNING:comparing:Wrong value type in spot_trading_months. Correct type is INTEGER
 WARNING:comparing:Wrong value type in contract_size. Correct type is DOUBLE
@@ -29,21 +25,4 @@ WARNING:comparing:Wrong value type in coupon_freq. Correct type is INTEGER
 WARNING:comparing:Wrong value type in fut_expiry_year. Correct type is INTEGER
 WARNING:comparing:Wrong value type in strike_divisor. Correct type is INTEGER
 WARNING:comparing:Wrong value type in LABEL. Correct type is DATE
-WARNING:comparing:Wrong value type in BID. Correct type is DOUBLE
-WARNING:comparing:Wrong value type in MID. Correct type is DOUBLE
-WARNING:comparing:Wrong value type in ASK. Correct type is DOUBLE
-WARNING:comparing:Wrong value type in SYNTHETIC. Correct type is INTEGER
-WARNING:comparing:Wrong value type in MDS_CHAIN_ORDER. Correct type is INTEGER
 WARNING:comparing:Wrong value type in MDS_DATE. Correct type is DATE
-WARNING:comparing:Wrong value type in SPOT_BID. Correct type is DOUBLE
-WARNING:comparing:Wrong value type in SPOT_MID. Correct type is DOUBLE
-WARNING:comparing:Wrong value type in SPOT_ASK. Correct type is DOUBLE
-WARNING:comparing:Wrong value type in UPFRONT_BID. Correct type is DOUBLE
-WARNING:comparing:Wrong value type in UPFRONT_MID. Correct type is DOUBLE
-WARNING:comparing:Wrong value type in UPFRONT_ASK. Correct type is DOUBLE
-WARNING:comparing:Wrong value type in QUOTE_BID. Correct type is DOUBLE
-WARNING:comparing:Wrong value type in QUOTE_MID. Correct type is DOUBLE
-WARNING:comparing:Wrong value type in QUOTE_ASK. Correct type is DOUBLE
-WARNING:comparing:Wrong value type in USER_SPREAD_IND. Correct type is INTEGER
-WARNING:comparing:Wrong value type in RUNNING_COUPON. Correct type is DOUBLE
-WARNING:comparing:Wrong value type in QUOTE_RECOVERY. Correct type is DOUBLE

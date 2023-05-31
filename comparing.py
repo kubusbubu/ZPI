@@ -3,34 +3,29 @@ from tools import date_format_standardization, change_type_to_compare
 import logging
 import os
 from tools import logger_function
-import json
-import csv
-import numpy as np
 import datetime
 
 logger_function()
 log = logging.getLogger(__name__)
 
+# function to check if datasets names and extensions match with main_dda information
+def check_datasets_names_and_extensions(json_file, directory) -> None:
+    for file_info in json_file["datasets"]:
+        filename = file_info['name']
+        extension = 'csv'
+        if not os.path.isfile(os.path.join(directory, f'{filename}.{extension}')):
+            log.warning(f'There is missing file {filename}.{extension}')
+        else:
+            for file in os.listdir(directory):
+                real_extension = os.path.splitext(file)[1][1:]
+                if real_extension != extension:
+                    log.warning(f'Incorrect extension in {filename}.{extension}')
+
 class Comparing():
-    def __init__(self, directory, json_file, dataframe, date, format):
-        self.directory = directory
+    def __init__(self, json_file, dataframe):
         self.json_file = json_file
         self.dataframe = dataframe
-        self.date = date
-        self.format = format
 
-    # function to check if datasets names and extensions match with main_dda information
-    def check_datasets_names_and_extensions(self) -> None:
-        for file_info in self.json_file["datasets"]:
-            filename = file_info['name']
-            extension = 'csv'
-            if not os.path.isfile(os.path.join(self.directory, f'{filename}.{extension}')):
-                log.warning(f'There is missing file {filename}.{extension}')
-            else:
-                for file in os.listdir(self.directory):
-                    real_extension = os.path.splitext(file)[1][1:]
-                    if real_extension != extension:
-                        log.warning(f'Incorrect extension in {filename}.{extension}')
 
     # function to change the date format (before checking the file)
     def date_format_check(self) -> None:
