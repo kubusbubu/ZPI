@@ -31,21 +31,19 @@ def convert_string_to_format(value):
     return value
 
 
-
-
 # helper function to change the date format (before checking the file)
-def date_format_standardization(custom_format):
-    custom_format = custom_format.replace("YYYY", "%Y")
-    custom_format = custom_format.replace("yyyy", "%Y")
-    custom_format = custom_format.replace("MMM", "%b")
-    custom_format = custom_format.replace("mmm", "%b")
-    custom_format = custom_format.replace("MM", "%m")
-    custom_format = custom_format.replace("mm", "%m")
-    custom_format = custom_format.replace("YY", "%y")
-    custom_format = custom_format.replace("yy", "%y")
-    custom_format = custom_format.replace("DD", "%d")
-    custom_format = custom_format.replace("dd", "%d")
-    return custom_format
+# def date_format_standardization(custom_format):
+#     custom_format = custom_format.replace("YYYY", "%Y")
+#     custom_format = custom_format.replace("yyyy", "%Y")
+#     custom_format = custom_format.replace("MMM", "%b")
+#     custom_format = custom_format.replace("mmm", "%b")
+#     custom_format = custom_format.replace("MM", "%m")
+#     custom_format = custom_format.replace("mm", "%m")
+#     custom_format = custom_format.replace("YY", "%y")
+#     custom_format = custom_format.replace("yy", "%y")
+#     custom_format = custom_format.replace("DD", "%d")
+#     custom_format = custom_format.replace("dd", "%d")
+#     return custom_format
 
 
 # function to unpack the contents of the tar file
@@ -61,20 +59,21 @@ def tar_unpack():
 # funckja do zapisania plikow csv z danej sciezki do listy z ramkami pandas
 def load_multiple_csv_to_dataframes(directory):
     dataframes = []
-    for filename in os.listdir(directory):
+    filenames = os.listdir(directory)
+    for filename in filenames:
         file_path = os.path.join(directory, filename)
 
         if os.path.isfile(file_path) and file_path.endswith('.csv'):
                 df = pd.read_csv(file_path)
                 dataframes.append(df)
-    return dataframes
+    return dataframes, filenames
 
 
 # function to download dda files and store them in memory
 def get_json_files():
     while True:
         # folder_path = input("Enter dda folder path: ")
-        folder_path = 'data_json'
+        folder_path = 'dda_json'
         if os.path.exists(folder_path) and os.path.isdir(folder_path):
             if not folder_path.endswith(os.path.sep):
                 folder_path += os.path.sep
@@ -122,4 +121,3 @@ def change_type_to_compare(value):
     elif value == 'DOUBLE':
         value = np.float64
     return value
-

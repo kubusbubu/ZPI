@@ -1,4 +1,4 @@
-from tools import logger_function, tar_unpack, date_format_standardization, get_json_files, create_tar_file, \
+from tools import logger_function, tar_unpack, get_json_files, create_tar_file, \
     load_multiple_csv_to_dataframes, clear_logger
 from comparing import Comparing, check_datasets_names_and_extensions
 import logging
@@ -17,14 +17,13 @@ def main():
     # print(datasets_dir_path)
 
     # load datasets to a list of pandas dataframes
-    csv_dataframes = load_multiple_csv_to_dataframes(datasets_dir_path)
+    csv_dataframes, filenames = load_multiple_csv_to_dataframes(datasets_dir_path)
 
     # check if datasets names and extensions are valid
-    check_datasets_names_and_extensions(main_json,datasets_dir_path)
-
+    check_datasets_names_and_extensions(main_json, datasets_dir_path)
 
     for i, dataframe in enumerate(csv_dataframes):
-        shard_object = Comparing(datasets_dir_path, individual_jsons_arr[i], dataframe)
+        shard_object = Comparing(individual_jsons_arr[i], dataframe, filenames[i])
 
         # check if column names in each dataset are valid
         shard_object.check_column_names()
@@ -43,5 +42,4 @@ if __name__ == '__main__':
 
     # run
     main()
-
 

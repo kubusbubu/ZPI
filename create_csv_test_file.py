@@ -5,10 +5,10 @@ import random
 import string
 
 
-# with open('dda_json/contoption.json', 'r') as f:
-#   jsondata = json.load(f)
-with open('data_json/trader_cds_price.json', 'r') as f:
+with open('dda_json/contoption.json', 'r') as f:
   jsondata = json.load(f)
+# with open('data_json/trader_cds_price.json', 'r') as f:
+#   jsondata = json.load(f)
 
 
 def random_dates(k):
@@ -67,5 +67,5 @@ for atrybut in jsondata:
     else:
         df[col_name] = date_data
 
-df.to_csv('datasets/trader_cds_price.csv')
+df.to_csv('datasets/contoption.csv')
 # print(df)

@@ -1,0 +1,134 @@
+[
+    {
+        "name": "INSTANCE",
+        "type": "STRING"
+    },
+    {
+        "name": "LABEL",
+        "type": "DATE",
+        "time_format": "DD-MMM-YYYY",
+        "description": "Label",
+        "cid": "D"
+    },
+    {
+        "name": "BID",
+        "description": "The price to buy securities ex: 0.00156611556366611",
+        "type": "DOUBLE",
+        "cid": "D"
+    },
+    {
+        "name": "MID",
+        "description": "MID of Bid and Ask ex: 0.00156611556366611",
+        "type": "DOUBLE",
+        "cid": "D"
+    },
+    {
+        "name": "ASK",
+        "description": "The price to sell securities ex: 0.00156611556366611",
+        "type": "DOUBLE",
+        "cid": "D"
+    },
+    {
+        "name": "SYNTHETIC",
+        "type": "INTEGER",
+        "description": "Synthetic",
+        "cid": "D"
+    },
+    {
+        "name": "MDS_CHAIN_ORDER",
+        "type": "INTEGER",
+        "description": "MDS chain order",
+        "cid": "D"
+    },
+    {
+        "name": "MDS_DATE",
+        "description": "MDS tarde date",
+        "type": "DATE",
+        "time_format": "yyyy-MM-dd",
+        "cid": "D"
+    },
+    {
+        "name": "SPOT_LABEL",
+        "description": "SPOT Label",
+        "type": "STRING",
+        "cid": "D"
+    },
+    {
+        "name": "SPOT_BID",
+        "description": "SPOT Bid",
+        "type": "DOUBLE",
+        "cid": "D"
+    },
+    {
+        "name": "SPOT_MID",
+        "description": "SPOT Mid",
+        "type": "DOUBLE",
+        "cid": "D"
+    },
+    {
+        "name": "SPOT_ASK",
+        "description": "SPOT Ask",
+        "type": "DOUBLE",
+        "cid": "D"
+    },
+    {
+        "name": "UPFRONT_BID",
+        "type": "DOUBLE",
+        "description": "UPFRONT_BID",
+        "cid": "D"
+    },
+    {
+        "name": "UPFRONT_MID",
+        "type": "DOUBLE",
+        "description": "UPFRONT_MID",
+        "cid": "D"
+    },
+    {
+        "name": "UPFRONT_ASK",
+        "type": "DOUBLE",
+        "description": "UPFRONT_ASK",
+        "cid": "D"
+    },
+    {
+        "name": "QUOTE_BID",
+        "type": "DOUBLE",
+        "description": "QUOTE_BID",
+        "cid": "D"
+    },
+    {
+        "name": "QUOTE_MID",
+        "type": "DOUBLE",
+        "description": "QUOTE_MID",
+        "cid": "D"
+    },
+    {
+        "name": "QUOTE_ASK",
+        "type": "DOUBLE",
+        "description": "QUOTE_ASK",
+        "cid": "D"
+    },
+    {
+        "name": "MARKING_METHOD",
+        "type": "STRING",
+        "description": "MARKING_METHOD",
+        "cid": "D"
+    },
+    {
+        "name": "USER_SPREAD_IND",
+        "type": "INTEGER",
+        "description": "User spread indicator",
+        "cid": "D"
+    },
+    {
+        "name": "RUNNING_COUPON",
+        "type": "DOUBLE",
+        "description": "Details of current coupon payments",
+        "cid": "D"
+    },
+    {
+        "name": "QUOTE_RECOVERY",
+        "type": "DOUBLE",
+        "description": "It provide details of the actions to take when the quoted price becomes stale.",
+        "cid": "D"
+    }
+]

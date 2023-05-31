@@ -1,0 +1,370 @@
+[
+    {
+        "name": "contract_id",
+        "type": "STRING",
+        "description": "ID of the Contract",
+        "cid": "D"
+    },
+    {
+        "name": "firm_contract_type",
+        "type": "INTEGER",
+        "description": "Firm Contract Type",
+        "cid": "D"
+    },
+    {
+        "name": "short_name",
+        "type": "STRING",
+        "description": "Short Name of the Contract",
+        "cid": "D"
+    },
+    {
+        "name": "long_name",
+        "type": "STRING",
+        "description": "Long Name of the Contract",
+        "cid": "D"
+    },
+    {
+        "name": "holiday_calendar_id",
+        "type": "STRING",
+        "description": "Holiday Calendar ID",
+        "cid": "D"
+    },
+    {
+        "name": "delivery_code",
+        "type": "STRING",
+        "description": "Code of Delivery",
+        "cid": "D"
+    },
+    {
+        "name": "trading_code",
+        "type": "STRING",
+        "description": "Trading Code",
+        "cid": "D"
+    },
+    {
+        "name": "exchange_id",
+        "type": "STRING",
+        "description": "Exchange ID",
+        "cid": "D"
+    },
+    {
+        "name": "type",
+        "type": "STRING",
+        "description": "Type",
+        "cid": "D"
+    },
+    {
+        "name": "trading_months",
+        "type": "STRING",
+        "description": "Trading Months",
+        "cid": "D"
+    },
+    {
+        "name": "spot_trading_months",
+        "type": "INTEGER",
+        "description": "Spot Trading Months",
+        "cid": "D"
+    },
+    {
+        "name": "notional_maturity_start",
+        "type": "STRING",
+        "description": "Notional Maturity Start",
+        "cid": "D"
+    },
+    {
+        "name": "notional_maturity_end",
+        "type": "STRING",
+        "description": "Notional Maturity End",
+        "cid": "D"
+    },
+    {
+        "name": "notional_coupon",
+        "type": "STRING",
+        "description": "Notional Coupon",
+        "cid": "D"
+    },
+    {
+        "name": "contract_size",
+        "type": "DOUBLE",
+        "description": "Contract Size",
+        "cid": "D"
+    },
+    {
+        "name": "currency",
+        "type": "STRING",
+        "description": "Currency",
+        "cid": "D"
+    },
+    {
+        "name": "quote_type",
+        "type": "STRING",
+        "description": "Quote Type",
+        "cid": "D"
+    },
+    {
+        "name": "price_dec_places",
+        "type": "INTEGER",
+        "description": "Price Dec Places",
+        "cid": "D"
+    },
+    {
+        "name": "price_tick_size",
+        "type": "STRING",
+        "description": "Price Tick Size",
+        "cid": "D"
+    },
+    {
+        "name": "units_in_quote",
+        "type": "STRING",
+        "description": "Units In Quote",
+        "cid": "D"
+    },
+    {
+        "name": "tick_value",
+        "type": "STRING",
+        "description": "Tick Value",
+        "cid": "D"
+    },
+    {
+        "name": "back_office_code",
+        "type": "STRING",
+        "description": "Back Office Code",
+        "cid": "D"
+    },
+    {
+        "name": "last_trading_date_rule",
+        "type": "STRING",
+        "description": "Last Trading Date Rule",
+        "cid": "D"
+    },
+    {
+        "name": "expiry_date_rule",
+        "type": "STRING",
+        "description": "Expiry Date Rule",
+        "cid": "D"
+    },
+    {
+        "name": "root_ric_symbol",
+        "type": "STRING",
+        "description": "Root Ric Symbol",
+        "cid": "D"
+    },
+    {
+        "name": "min_fluctuation",
+        "type": "DOUBLE",
+        "description": "Min Fluctuation",
+        "cid": "D"
+    },
+    {
+        "name": "notional_maturity_units",
+        "type": "INTEGER",
+        "description": "Notional Maturity Units",
+        "cid": "D"
+    },
+    {
+        "name": "max_contracts",
+        "type": "INTEGER",
+        "description": "Max Contracts",
+        "cid": "D"
+    },
+    {
+        "name": "default_executing_broker",
+        "type": "STRING",
+        "description": "Default Executing Broker",
+        "cid": "D"
+    },
+    {
+        "name": "default_clearing_broker",
+        "type": "STRING",
+        "description": "Default Clearing Broker",
+        "cid": "D"
+    },
+    {
+        "name": "underlying_instr",
+        "type": "INTEGER",
+        "description": "Underlying Instr",
+        "cid": "D"
+    },
+    {
+        "name": "underlying_instr_string",
+        "type": "STRING",
+        "description": "Underlying Instr String",
+        "cid": "D"
+    },
+    {
+        "name": "future_code",
+        "type": "STRING",
+        "description": "Future Code",
+        "cid": "D"
+    },
+    {
+        "name": "domicile",
+        "type": "STRING",
+        "description": "Domicile",
+        "cid": "D"
+    },
+    {
+        "name": "underlying_ric",
+        "type": "STRING",
+        "description": "Underlying Ric",
+        "cid": "D"
+    },
+    {
+        "name": "contract_type",
+        "type": "STRING",
+        "description": "Contract Type",
+        "cid": "D"
+    },
+    {
+        "name": "mds_date",
+        "time_format": "YYYY-MM-DD",
+        "type": "DATE",
+        "description": "Mds Date",
+        "cid": "D"
+    },
+    {
+        "name": "active",
+        "type": "STRING",
+        "description": "Active",
+        "cid": "D"
+    },
+    {
+        "name": "version_number",
+        "type": "INTEGER",
+        "description": "Version Number",
+        "cid": "D"
+    },
+    {
+        "name": "version_user_id",
+        "type": "STRING",
+        "description": "Version User Id",
+        "cid": "D"
+    },
+    {
+        "name": "version_date",
+        "type": "DATE",
+        "time_format": "YYYY-MM-DD",
+        "description": "Version Date",
+        "cid": "D"
+    },
+    {
+        "name": "default_executing_ny",
+        "type": "STRING",
+        "description": "Default Executing Ny",
+        "cid": "D"
+    },
+    {
+        "name": "default_clearing_ny",
+        "type": "STRING",
+        "description": "Default Clearing Ny",
+        "cid": "D"
+    },
+    {
+        "name": "default_executing_tk",
+        "type": "STRING",
+        "description": "Default Executing Tk",
+        "cid": "D"
+    },
+    {
+        "name": "default_clearing_tk",
+        "type": "STRING",
+        "description": "Default Clearing Tk",
+        "cid": "D"
+    },
+    {
+        "name": "default_executing_hk",
+        "type": "STRING",
+        "description": "Default Executing Hk",
+        "cid": "D"
+    },
+    {
+        "name": "default_clearing_hk",
+        "type": "STRING",
+        "description": "Default Clearing Hk",
+        "cid": "D"
+    },
+    {
+        "name": "min_ctd_bonds",
+        "type": "INTEGER",
+        "description": "Min Ctd Bonds",
+        "cid": "D"
+    },
+    {
+        "name": "max_ctd_bonds",
+        "type": "INTEGER",
+        "description": "Max Ctd Bonds",
+        "cid": "D"
+    },
+    {
+        "name": "duration",
+        "type": "STRING",
+        "description": "Duration",
+        "cid": "D"
+    },
+    {
+        "name": "coupon_freq",
+        "type": "INTEGER",
+        "description": "Coupon Freq",
+        "cid": "D"
+    },
+    {
+        "name": "price_for_tick",
+        "type": "STRING",
+        "description": "Price For Tick",
+        "cid": "D"
+    },
+    {
+        "name": "margined",
+        "type": "STRING",
+        "description": "Margined",
+        "cid": "D"
+    },
+    {
+        "name": "settlement_type",
+        "type": "STRING",
+        "description": "Settlement Type",
+        "cid": "D"
+    },
+    {
+        "name": "expiry_time",
+        "type": "STRING",
+        "description": "Expiry Time",
+        "cid": "D"
+    },
+    {
+        "name": "contract_multiplier",
+        "type": "STRING",
+        "description": "Contract Multiplier",
+        "cid": "D"
+    },
+    {
+        "name": "cash_in_lieu",
+        "type": "STRING",
+        "description": "Cash In Lieu",
+        "cid": "D"
+    },
+    {
+        "name": "related_contfuture_code",
+        "type": "STRING",
+        "description": "Related Contfuture Code",
+        "cid": "D"
+    },
+    {
+        "name": "fut_expiry_year",
+        "type": "INTEGER",
+        "description": "Fut Expiry Year",
+        "cid": "D"
+    },
+    {
+        "name": "strike_divisor",
+        "type": "INTEGER",
+        "description": "Strike Divisor",
+        "cid": "D"
+    },
+    {
+        "name": "root_ric_override",
+        "type": "STRING",
+        "description": "Root Ric Override",
+        "cid": "D"
+    }
+]

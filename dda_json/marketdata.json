@@ -1,0 +1,381 @@
+{
+    "name": "marketdata",
+    "description": "MDS market data",
+    "sourcing_team": "CCO Data Sourcing",
+    "platform": "pcloud",
+    "dda": "https://zu-sp2016.csintra.net/cro/dsdg/Data%20Sources/pcloud/marketData/template_source_marketdata.xlsx",
+    "enzyme_version": "4",
+    "environments": {
+        "pta": {
+            "staging_nas_folder": "/cs/data_uat/staging/marketdata",
+            "sources": [
+                {
+                    "type": "ftps_rcv",
+                    "alias": "mds_feed"
+                }
+            ]
+        },
+        "prod": {
+            "landing_nas_folder": "/cs/pcloudnas_Primary/landing/marketdata",
+            "staging_nas_folder": "/cs/pcloudnas_Primary/staging/marketdata",
+            "sources": [
+                {
+                    "type": "mds",
+                    "alias": "mds_feed",
+                    "proxy_mode": false,
+                    "servers": [
+                        {
+                            "host": "ln_mds_prd1.eu.hedani.net",
+                            "port": 33300
+                        },
+                        {
+                            "host": "ny_mds_prd1.fir.fbc.com",
+                            "port": 33300
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "foundry": {
+        "path": "/cs/marketdata"
+    },
+    "controlm": {
+        "three_letter_name": "MDS",
+        "crontab_schedule": "0 00 05 ? * * *"
+    },
+    "landing_file_format": {
+        "type": "csv",
+        "field_delimiter": ",",
+        "row_delimiter": "\n",
+        "quote_character": "\"",
+        "header_row": "1",
+        "encoding": "us-ascii",
+        "extension": ".csv"
+    },
+    "staging_file_format": {
+        "type": "csv",
+        "field_delimiter": ",",
+        "row_delimiter": "\n",
+        "quote_character": "\\\"",
+        "header_row": "1",
+        "extension": ".csv"
+    },
+    "file_checks": {
+        "schema": {
+            "column_count": {
+                "behavior": "stop_file_fail",
+                "num_rows_check": "ALL",
+                "mode": "expected"
+            }
+        },
+        "header_checks": {
+            "header": {
+                "behavior": "stop_file"
+            }
+        },
+        "column_date_checks": {
+            "column_date": {
+                "behavior": "info_file",
+                "num_rows_check": "All",
+                "columns_check": [
+                    "mds_date"
+                ]
+            }
+        },
+        "column_date_check_sd": {
+            "column_date": {
+                "behavior": "info_file",
+                "num_rows_check": "All",
+                "columns_check": [
+                    "MDS_DATE"
+                ]
+            }
+        },
+        "time": {
+            "timeliness": {
+                "delivery_cron": "15 06 * * *",
+                "delivery_delta": "PREVIOUS_DAY",
+                "delivery_delta_business": false,
+                "num_files": 1
+            }
+        },
+        "not_empty": {
+            "not_empty": {}
+        }
+    },
+    "datasets": [
+        {
+            "name": "debt_bb_pr",
+            "file_pattern": "debt_bb_pr_@DATE@@EXT@",
+            "file_pattern_date": "yyyy-MM-dd",
+            "source": "mds_feed",
+            "file_checks": [
+                "schema",
+                "not_empty",
+                "time",
+                "column_date_checks",
+                "header_checks"
+            ],
+            "ingestion_type": "all_files",
+            "mds": {
+                "type": "catalog_lookup",
+                "lookup_chunk": 100,
+                "class": "DEBT_BB_PR",
+                "writeCatalogFile": false,
+                "sleepTime": 15,
+                "retries": 8
+            },
+            "obfuscation_app": "MARKETDATA_DEBT_BB_PR",
+            "obfuscation_app_id": "2472"
+        },
+        {
+            "name": "eq_bb_pr",
+            "file_pattern": "eq_bb_pr_@DATE@@EXT@",
+            "file_pattern_date": "yyyy-MM-dd",
+            "source": "mds_feed",
+            "file_checks": [
+                "schema",
+                "not_empty",
+                "time",
+                "column_date_checks",
+                "header_checks"
+            ],
+            "ingestion_type": "all_files",
+            "mds": {
+                "type": "catalog_lookup",
+                "lookup_chunk": 100,
+                "class": "EQ_BB_PR",
+                "writeCatalogFile": false,
+                "sleepTime": 15,
+                "retries": 8
+            },
+            "obfuscation_app": "MARKETDATA_EQ_BB_PR",
+            "obfuscation_app_id": "2473"
+        },
+        {
+            "name": "trader",
+            "file_pattern": "trader_@DATE@@EXT@",
+            "file_pattern_date": "yyyy-MM-dd",
+            "source": "mds_feed",
+            "file_checks": [
+                "schema",
+                "not_empty",
+                "time",
+                "header_checks"
+            ],
+            "ingestion_type": "all_files",
+            "mds": {
+                "type": "by_key",
+                "class": "TRADER",
+                "qualifier": "ACTIVE",
+                "category": "O",
+                "identifier": "@NULL@",
+                "sleepTime": 15,
+                "retries": 8
+            },
+            "obfuscation_app": "MARKETDATA_TRADER",
+            "obfuscation_app_id": "2474"
+        },
+        {
+            "name": "fb_trader",
+            "file_pattern": "fb_trader_@DATE@@EXT@",
+            "file_pattern_date": "yyyy-MM-dd",
+            "source": "mds_feed",
+            "file_checks": [
+                "schema",
+                "not_empty",
+                "time",
+                "header_checks"
+            ],
+            "ingestion_type": "all_files",
+            "mds": {
+                "type": "by_key",
+                "class": "FBTRADER",
+                "qualifier": "ACTIVE",
+                "category": "O",
+                "identifier": "@NULL@",
+                "sleepTime": 15,
+                "retries": 8
+            },
+            "obfuscation_app": "MARKETDATA_FB_TRADER",
+            "obfuscation_app_id": "2475"
+        },
+        {
+            "name": "trader_cds_price"
+        },
+        {
+            "name": "contoption",
+            "file_pattern": "contoption_@DATE@@EXT@",
+            "file_pattern_date": "yyyy-MM-dd",
+            "source": "mds_feed",
+            "file_checks": [
+                "schema",
+                "not_empty",
+                "time",
+                "column_date_checks",
+                "header_checks"
+            ],
+            "ingestion_type": "all_files",
+            "mds": {
+                "type": "by_key",
+                "class": "CONTOPTION",
+                "qualifier": "",
+                "category": "R",
+                "identifier": "@LATEST@",
+                "sleepTime": 15,
+                "retries": 8
+            },
+            "obfuscation_app": "MARKETDATA_CONTOPTION",
+            "obfuscation_app_id": "2476"
+        },
+        {
+            "name": "fx_shredder",
+            "file_pattern": "fx_shredder_@DATE@@EXT@",
+            "file_pattern_date": "yyyy-MM-dd",
+            "source": "mds_feed",
+            "file_checks": [
+                "schema",
+                "not_empty",
+                "time",
+                "column_date_checks",
+                "header_checks"
+            ],
+            "ingestion_type": "all_files",
+            "mds": {
+                "type": "by_key",
+                "class": "FX",
+                "qualifier": "SHREDDER",
+                "category": "R",
+                "identifier": "@LATEST@",
+                "sleepTime": 15,
+                "retries": 8
+            },
+            "obfuscation_app": "MARKETDATA_FX_SHREDDER",
+            "obfuscation_app_id": "2477"
+        },
+        {
+            "name": "GFX_Spot",
+            "file_pattern": "GFX_Spot_@DATE@@EXT@",
+            "file_pattern_date": "ddMMMyyyy",
+            "source": "mds_feed",
+            "file_checks": [
+                "schema",
+                "not_empty",
+                "time",
+                "column_date_checks",
+                "header_checks"
+            ],
+            "ingestion_type": "all_files",
+            "mds": {
+                "type": "by_key",
+                "class": "FX",
+                "qualifier": "GFXSPOT",
+                "category": "R",
+                "identifier": "@LATEST@",
+                "sleepTime": 15,
+                "retries": 8
+            },
+            "obfuscation_app": "MARKETDATA_GFX_SPOT",
+            "obfuscation_app_id": "4393"
+        },
+        {
+            "name": "eq_rt_pr",
+            "file_pattern": "eq_rt_pr_@DATE@@EXT@",
+            "file_pattern_date": "yyyy-MM-dd",
+            "source": "mds_feed",
+            "file_checks": [
+                "schema",
+                "not_empty",
+                "time",
+                "column_date_checks",
+                "header_checks"
+            ],
+            "ingestion_type": "all_files",
+            "mds": {
+                "type": "catalog_lookup",
+                "lookup_chunk": 100,
+                "class": "EQ_RT_PR",
+                "writeCatalogFile": false,
+                "sleepTime": 15,
+                "retries": 8
+            },
+            "obfuscation_app": "MARKETDATA_EQ_RT_PR",
+            "obfuscation_app_id": "2478"
+        },
+        {
+            "name": "reference_entity",
+            "file_pattern": "reference_entity_@DATE@@EXT@",
+            "file_pattern_date": "yyyy-MM-dd",
+            "source": "mds_feed",
+            "file_checks": [
+                "schema",
+                "not_empty",
+                "time",
+                "column_date_checks",
+                "header_checks"
+            ],
+            "ingestion_type": "all_files",
+            "mds": {
+                "class": "REFERENCE_ENTITY",
+                "type": "by_key",
+                "qualifier": "",
+                "category": "R",
+                "identifier": "@LATEST@",
+                "sleepTime": 15,
+                "retries": 8
+            },
+            "obfuscation_app": "MARKETDATA_REFERENCE_ENTITY",
+            "obfuscation_app_id": "3003"
+        },
+        {
+            "name": "sdata_commodity",
+            "file_pattern": "sdata_commodity_@DATE@@EXT@",
+            "file_pattern_date": "yyyy-MM-dd",
+            "source": "mds_feed",
+            "file_checks": [
+                "schema",
+                "not_empty",
+                "time",
+                "column_date_check_sd",
+                "header_checks"
+            ],
+            "ingestion_type": "all_files",
+            "mds": {
+                "class": "SDATA",
+                "type": "by_key",
+                "qualifier": "COMMODITY",
+                "category": "R",
+                "identifier": "@LATEST@",
+                "sleepTime": 15,
+                "retries": 8
+            },
+            "obfuscation_app": "MARKETDATA_SDATA_COMMODITY",
+            "obfuscation_app_id": "3004"
+        },
+        {
+            "name": "eq_rt_pr_adj_factor",
+            "file_pattern": "eq_rt_pr_adj_factor_@DATE@@EXT@",
+            "file_pattern_date": "yyyy-MM-dd",
+            "source": "mds_feed",
+            "file_checks": [
+                "schema",
+                "not_empty",
+                "time",
+                "header_checks"
+            ],
+            "ingestion_type": "latest_file",
+            "mds": {
+                "type": "catalog_lookup",
+                "category": "O",
+                "lookup_chunk": 100,
+                "class": "EQ_RT_PR_ADJ_FACTOR",
+                "writeCatalogFile": false,
+                "sleepTime": 15,
+                "retries": 8
+            },
+            "obfuscation_app": "MARKETDATA_EQ_RT_PR_ADJ_FACTOR",
+            "obfuscation_app_id": "3585"
+        }
+    ]
+}

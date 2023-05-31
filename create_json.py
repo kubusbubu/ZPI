@@ -75,12 +75,12 @@ import csv
 import json
 from comparing import check_dataframe_types
 
-csv_file = 'datasets/contoption.csv'
+csv_file = 'datasets/trader_cds_price.csv'
 with open(csv_file, 'r') as f:
         reader = csv.DictReader(f)
         df = pd.DataFrame(reader)
 
-with open('data_json/contoption.json', 'r') as f:
+with open('dda_json/trader_cds_price.json', 'r') as f:
   jsondata = json.load(f)
 
 print(check_dataframe_types(df, jsondata))
