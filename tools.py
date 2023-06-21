@@ -5,6 +5,7 @@ import json
 import glob
 import logging
 import pandas as pd
+from datetime import datetime
 
 # logger_function()
 # log = logging.getLogger(__name__)
@@ -30,20 +31,27 @@ def convert_string_to_format(value):
         value = np.float64
     return value
 
+def date_format_check(value, format):
+    format = convert_format(format)
+    try:
+        datetime.strptime(value, format)
+        return True
+    except ValueError:
+        return False
 
-# helper function to change the date format (before checking the file)
-# def date_format_standardization(custom_format):
-#     custom_format = custom_format.replace("YYYY", "%Y")
-#     custom_format = custom_format.replace("yyyy", "%Y")
-#     custom_format = custom_format.replace("MMM", "%b")
-#     custom_format = custom_format.replace("mmm", "%b")
-#     custom_format = custom_format.replace("MM", "%m")
-#     custom_format = custom_format.replace("mm", "%m")
-#     custom_format = custom_format.replace("YY", "%y")
-#     custom_format = custom_format.replace("yy", "%y")
-#     custom_format = custom_format.replace("DD", "%d")
-#     custom_format = custom_format.replace("dd", "%d")
-#     return custom_format
+# pomijamy rozróżnienie w między datami np. 01 i 1
+def convert_format(custom_format):
+    custom_format = custom_format.replace("YYYY", "%Y")
+    custom_format = custom_format.replace("yyyy", "%Y")
+    custom_format = custom_format.replace("MMM", "%b")
+    custom_format = custom_format.replace("mmm", "%b")
+    custom_format = custom_format.replace("MM", "%m")
+    custom_format = custom_format.replace("mm", "%m")
+    custom_format = custom_format.replace("YY", "%y")
+    custom_format = custom_format.replace("yy", "%y")
+    custom_format = custom_format.replace("DD", "%d")
+    custom_format = custom_format.replace("dd", "%d")
+    return custom_format
 
 
 # function to unpack the contents of the tar file
@@ -107,10 +115,16 @@ def logger_function():
     logging.basicConfig(level=logging.INFO, filename="log.log", filemode="a")
 
 
-# clear logger
 def clear_logger() -> None:
-    with open('log.log', 'w'):
-        pass
+    log_file = 'log.log'
+    try:
+        if os.path.exists(log_file):
+            with open(log_file, 'w'):
+                pass
+        else:
+            print(f"Log file '{log_file}' does not exist.")
+    except IOError as e:
+        print(f"An error occurred while clearing the log file: {e}")
 
 
 def change_type_to_compare(value):

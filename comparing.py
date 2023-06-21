@@ -2,7 +2,7 @@ from datetime import datetime
 from tools import change_type_to_compare
 import logging
 import os
-from tools import logger_function
+from tools import logger_function, date_format_check
 
 
 logger_function()
@@ -70,17 +70,17 @@ class Comparing:
                 for ind, val in enumerate(list(values)):
                     if not isinstance(val, str):
                         wrong_rows.append(ind)
-                log.warning(f"There are wrong value types in following rows {wrong_rows}")
+                if len(wrong_rows) != 0:
+                    log.warning(f"There are wrong value types in following rows {wrong_rows} in {self.filename}")
 
             elif expected_type == 'DATE':
                 wrong_rows = []
                 for i, val in enumerate(list(values)):
                     expected_date_pattern = self.json_file[ind]["time_format"]
-                    try:
-                        datetime.strptime(val, expected_date_pattern)
-                    except ValueError:
+                    if not date_format_check(val, expected_date_pattern):
                         wrong_rows.append(i)
-                log.warning(f"There are wrong value types in following rows {wrong_rows}, should be DATE with {expected_date_pattern} format")
+                if len(wrong_rows) != 0:   
+                    log.warning(f"There are wrong value types in following rows {wrong_rows} in {self.filename}, should be DATE with {expected_date_pattern} format")
 
             elif expected_type == 'DOUBLE' and not values.apply(lambda x: isinstance(x, float)).all():
                 log.warning(f"Wrong value type in {column_name} in {self.filename}. Correct type is {expected_type}")
@@ -88,7 +88,8 @@ class Comparing:
                 for ind, val in enumerate(list(values)):
                     if not isinstance(val, float):
                         wrong_rows.append(ind)
-                log.warning(f"There are wrong value types in following rows {wrong_rows}")
+                if len(wrong_rows) != 0:
+                    log.warning(f"There are wrong value types in following rows {wrong_rows} in {self.filename}")
 
             elif expected_type == 'INTEGER' and not values.apply(lambda x: isinstance(x, int)).all():
                 log.warning(f"Wrong value type in {column_name} in {self.filename}. Correct type is {expected_type}")
@@ -96,7 +97,8 @@ class Comparing:
                 for ind, val in enumerate(list(values)):
                     if not isinstance(val, int):
                         wrong_rows.append(ind)
-                log.warning(f"There are wrong value types in following rows {wrong_rows}")
+                if len(wrong_rows) != 0:
+                    log.warning(f"There are wrong value types in following rows {wrong_rows} in {self.filename}")
         return True  # All values in all columns are of the correct types
 
 
