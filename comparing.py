@@ -1,5 +1,3 @@
-from datetime import datetime
-from tools import change_type_to_compare
 import logging
 import os
 from tools import logger_function, date_format_check
@@ -29,16 +27,6 @@ class Comparing:
         self.dataframe = dataframe
         self.filename = filename
 
-    # # function to change the date format (before checking the file)
-    # def date_format_check(self, date, pattern, ind) -> None:
-    #     try:
-    #         datetime.strptime(date, pattern)
-    #     except ValueError:
-    #         wrong_rows
-    #         # log.warning(f'Invalid date format')
-
-
-    # sprawdz nazwy kolumn
     def check_column_names(self):
         # csv -> pandas
         df_columns = list(self.dataframe.columns)
@@ -71,7 +59,7 @@ class Comparing:
                     if not isinstance(val, str):
                         wrong_rows.append(ind)
                 if len(wrong_rows) != 0:
-                    log.warning(f"There are wrong value types in following rows {wrong_rows} in {self.filename}")
+                    log.warning(f"There are wrong value types in following rows {wrong_rows} in {column_name} in {self.filename}")
 
             elif expected_type == 'DATE':
                 wrong_rows = []
@@ -79,39 +67,26 @@ class Comparing:
                     expected_date_pattern = self.json_file[ind]["time_format"]
                     if not date_format_check(val, expected_date_pattern):
                         wrong_rows.append(i)
-                if len(wrong_rows) != 0:   
-                    log.warning(f"There are wrong value types in following rows {wrong_rows} in {self.filename}, should be DATE with {expected_date_pattern} format")
+                if len(wrong_rows) != 0:
+                    log.warning(f"There are wrong value types in following rows {wrong_rows} in {column_name} in {self.filename}, should be DATE with {expected_date_pattern} format")
 
             elif expected_type == 'DOUBLE' and not values.apply(lambda x: isinstance(x, float)).all():
                 log.warning(f"Wrong value type in {column_name} in {self.filename}. Correct type is {expected_type}")
                 wrong_rows = []
                 for ind, val in enumerate(list(values)):
-                    if not isinstance(val, float):
+                    try:
+                        float(val)
+                    except ValueError:
                         wrong_rows.append(ind)
                 if len(wrong_rows) != 0:
-                    log.warning(f"There are wrong value types in following rows {wrong_rows} in {self.filename}")
+                    log.warning(f"There are wrong value types in following rows {wrong_rows} in {column_name} in {self.filename}")
 
             elif expected_type == 'INTEGER' and not values.apply(lambda x: isinstance(x, int)).all():
                 log.warning(f"Wrong value type in {column_name} in {self.filename}. Correct type is {expected_type}")
                 wrong_rows = []
                 for ind, val in enumerate(list(values)):
-                    if not isinstance(val, int):
+                    if not val.isnumeric():
                         wrong_rows.append(ind)
                 if len(wrong_rows) != 0:
-                    log.warning(f"There are wrong value types in following rows {wrong_rows} in {self.filename}")
+                    log.warning(f"There are wrong value types in following rows {wrong_rows} in {column_name} in {self.filename}")
         return True  # All values in all columns are of the correct types
-
-
-'''
-# DO naprawy
-def check_column_types(dataframe, json_file):
-    # csv -> pandas
-    df_types = list(dataframe.dtypes)
-    print(dataframe.dtypes)
-    del df_types[0]
-    for type in range(len(json_file)):
-        if change_type_to_compare(json_file[type]["type"]) != df_types[type]:
-            print(f"typ z json: {json_file[type]['type']}, z json po konwersji: {change_type_to_compare(json_file[type]['type'])}, df.type:{df_types[type]}")
-            # Dodac nazwe datasetu
-            log.warning(f"Wrong column type in ... column name :  {json_file[type]['name']}")
-'''

@@ -43,3 +43,7 @@ if __name__ == '__main__':
     # run
     main()
 
+    with open('log.log', 'r') as log_file:
+        for line in log_file:
+            if line.strip():
+                log.warning(f"No errors detected")

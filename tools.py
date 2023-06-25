@@ -7,9 +7,6 @@ import logging
 import pandas as pd
 from datetime import datetime
 
-# logger_function()
-# log = logging.getLogger(__name__)
-
 
 # create tar file for testing
 def create_tar_file(directory, output_filename):
@@ -31,6 +28,7 @@ def convert_string_to_format(value):
         value = np.float64
     return value
 
+
 def date_format_check(value, format):
     format = convert_format(format)
     try:
@@ -39,7 +37,7 @@ def date_format_check(value, format):
     except ValueError:
         return False
 
-# pomijamy rozróżnienie w między datami np. 01 i 1
+
 def convert_format(custom_format):
     custom_format = custom_format.replace("YYYY", "%Y")
     custom_format = custom_format.replace("yyyy", "%Y")
