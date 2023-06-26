@@ -14,8 +14,6 @@ def main():
     # unpack tar file
     datasets_dir_path = tar_unpack()
 
-    # print(datasets_dir_path)
-
     # load datasets to a list of pandas dataframes
     csv_dataframes, filenames = load_multiple_csv_to_dataframes(datasets_dir_path)
 
@@ -42,8 +40,4 @@ if __name__ == '__main__':
 
     # run
     main()
-
-    with open('log.log', 'r') as log_file:
-        for line in log_file:
-            if line.strip():
-                log.warning(f"No errors detected")
+    
